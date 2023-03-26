@@ -1,6 +1,10 @@
 import './sass/index.scss';
 import NewsApiService from './api-service';
 import lightbox from './lightbox';
+// Описаний в документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 // all modules
 import Notiflix from 'notiflix';
