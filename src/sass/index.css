@@ -147,7 +147,7 @@ p {
   cursor: pointer;
 }
 .search-form__button:hover, .search-form__button:focus {
-  background-color: rgb(255, 255, 126);
+  background-color: rgb(126, 218, 255);
 }
 
 .img-search {
