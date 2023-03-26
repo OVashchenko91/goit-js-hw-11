@@ -1,54 +1,10 @@
-import axios from 'axios';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export default class NewsApiService {
-  constructor() {
-    this.searchQuery = '';
-    this.page = 1;
-    this.PER_PAGE = 40;
-  }
-  async fetchGallery() {
-    const axiosOptions = {
-      method: 'get',
-      url: 'https://pixabay.com/api/',
-      params: {
-        key: '34751738-d2b2bc2823b3d8a283ca4d922',
-        q: `${this.searchQuery}`,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
-        page: `${this.page}`,
-        per_page: `${this.PER_PAGE}`,
-      },
-    };
-    try {
-      const response = await axios(axiosOptions);
+let lightbox = new SimpleLightbox('.photo-card a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
-      const data = response.data;
-
-      this.incrementPage();
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  incrementPage() {
-    this.page += 1;
-  }
-
-  resetPage() {
-    this.page = 1;
-  }
-
-  resetEndOfHits() {
-    this.endOfHits = false;
-  }
-
-  get query() {
-    return this.searchQuery;
-  }
-
-  set query(newQuery) {
-    this.searchQuery = newQuery;
-  }
-}
+export { lightbox };
