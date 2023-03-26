@@ -1,6 +1,6 @@
 import './sass/index.scss';
 import NewsApiService from './api-service';
-import lightbox from './lightbox';
+import { lightbox }  from './lightbox';
 
 // Описаний в документації
 import SimpleLightbox from "simplelightbox";
