@@ -218,11 +218,11 @@ p {
   border-radius: 8px;
   cursor: pointer;
   color: black;
-  background-color: gainsboro;
+  background-color: rgb(220, 220, 220);
 }
 .load-more:hover, .load-more:focus {
   color: black;
-  background-color: rgb(255, 255, 126);
+  background-color: rgb(126, 255, 143);
 }
 .load-more.is-hidden {
   display: none;
