@@ -59,7 +59,6 @@ function onLoadMore() {
 }
 
 async function fetchGallery() {
-onRenderGallery(hits);
 
   refs.loadMoreBtn.classList.add('is-hidden');
 
