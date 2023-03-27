@@ -50,7 +50,7 @@ function onSearch(e) {
 
   isShown = 0;
   fetchGallery();
-  onRenderGallery(hits);
+  
 }
 
 function onLoadMore() {
@@ -59,7 +59,6 @@ function onLoadMore() {
 }
 
 async function fetchGallery() {
-
   refs.loadMoreBtn.classList.add('is-hidden');
 
   const r = await newsApiService.fetchGallery();
@@ -87,8 +86,9 @@ async function fetchGallery() {
   }
 }
 
-function onRenderGallery(hits) {
-  const markup = hits
+
+function onRenderGallery(elements) {
+  const markup = elements
     .map(
       ({
         webformatURL,
@@ -128,3 +128,4 @@ function onRenderGallery(hits) {
   refs.galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 }
+
