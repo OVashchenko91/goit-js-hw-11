@@ -58,9 +58,6 @@ function onLoadMore() {
   fetchGallery();
 }
 
-
-
-
 async function fetchGallery() {
   refs.loadMoreBtn.classList.add('is-hidden');
 
@@ -76,8 +73,7 @@ async function fetchGallery() {
     return;
   }
 
-    onRenderGallery(hits);
-    
+  onRenderGallery(hits);
   isShown += hits.length;
 
   if (isShown < total) {
@@ -90,36 +86,8 @@ async function fetchGallery() {
   }
 }
 
-async function fetchGallery() {
-  refs.loadMoreBtn.classList.add('is-hidden');
-
-  const r = await newsApiService.fetchGallery();
-  const { hits, total } = r;
-  isShown += hits.length;
-
-  if (!hits.length) {
-    Notify.failure(
-      `Sorry, there are no images matching your search query. Please try again.`
-    );
-    refs.loadMoreBtn.classList.add('is-hidden');
-    return;
-  }
-
-  onRenderGallery(hits); // передаємо hits в якості параметра
-  isShown += hits.length;
-
-  if (isShown < total) {
-    Notify.success(`Hooray! We found ${total} images !!!`);
-    refs.loadMoreBtn.classList.remove('is-hidden');
-  }
-
-  if (isShown >= total) {
-    Notify.info("We're sorry, but you've reached the end of search results.");
-  }
-}
-
-function onRenderGallery(hits) { // отримуємо hits як параметр
-  const markup = hits // використовуємо hits замість глобальної змінної
+function onRenderGallery(hits) {
+  const markup = hits
     .map(
       ({
         webformatURL,
