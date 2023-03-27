@@ -86,7 +86,6 @@ onRenderGallery(hits);
   if (isShown >= total) {
     Notify.info("We're sorry, but you've reached the end of search results.");
   }
-    return hits;
 }
 
 function onRenderGallery(hits) {
