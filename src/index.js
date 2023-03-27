@@ -58,6 +58,78 @@ function onLoadMore() {
   fetchGallery();
 }
 
+// async function fetchGallery() {
+  refs.loadMoreBtn.classList.add('is-hidden');//
+
+  const r = await newsApiService.fetchGallery();
+  const { hits, total } = r;
+  isShown += hits.length;
+
+  if (!hits.length) {
+    Notify.failure(
+      `Sorry, there are no images matching your search query. Please try again.`
+    );
+    refs.loadMoreBtn.classList.add('is-hidden');
+    return;
+  }
+
+    onRenderGallery( hits );
+    
+  isShown += hits.length;
+
+  if (isShown < total) {
+    Notify.success(`Hooray! We found ${total} images !!!`);
+    refs.loadMoreBtn.classList.remove('is-hidden');
+  }
+
+  if (isShown >= total) {
+    Notify.info("We're sorry, but you've reached the end of search results.");
+  }
+
+
+function onRenderGallery(elements) {
+  const markup = elements
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `<div class="photo-card">
+    <a href="${largeImageURL}">
+      <img class="photo-img" src="${webformatURL}" alt="${tags}" loading="lazy" />
+    </a>
+    <div class="info">
+      <p class="info-item">
+        <b>Likes</b>
+        ${likes}
+      </p>
+      <p class="info-item">
+        <b>Views</b>
+        ${views}
+      </p>
+      <p class="info-item">
+        <b>Comments</b>
+        ${comments}
+      </p>
+      <p class="info-item">
+        <b>Downloads</b>
+        ${downloads}
+      </p>
+    </div>
+    </div>`;
+      }
+    )
+    .join('');
+  refs.galleryContainer.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh();
+}
+//
+
 async function fetchGallery() {
   refs.loadMoreBtn.classList.add('is-hidden');
 
@@ -73,7 +145,7 @@ async function fetchGallery() {
     return;
   }
 
-  onRenderGallery(hits);
+  onRenderGallery(hits); // передаємо hits в якості параметра
   isShown += hits.length;
 
   if (isShown < total) {
@@ -86,8 +158,8 @@ async function fetchGallery() {
   }
 }
 
-function onRenderGallery(elements) {
-  const markup = elements
+function onRenderGallery(hits) { // отримуємо hits як параметр
+  const markup = hits // використовуємо hits замість глобальної змінної
     .map(
       ({
         webformatURL,
